@@ -1,0 +1,3 @@
+"main.cpp":
+	debugger: "dbg-gdb"
+	path: "main.cpp"
