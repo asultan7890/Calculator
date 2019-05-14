@@ -4,32 +4,37 @@
 #include <ctype.h>
 #include <string>
 #include <math.h>
-using namespace std;
 
 void calc();
 void pi();
 void evalue();
+void prime();
 bool returnMenu();
 
 int main() {
 	bool loop = true;
-	while (loop == true){
-		cout << "Calculator" << endl;
+	int input;
 
-		cout << "1 - Basic Calculator" << endl;
-		cout << "2 - Find PI to Nth digit" << endl;
-		cout << "3 - Find e to the Nth digit" << endl;
+	while (loop == true) {
+		std::cout << "Calculator" << '\n';
 
-		int input;
-		cin >> input;
-		if (input == 1){
+		std::cout << "1 - Basic Calculator" << '\n';
+		std::cout << "2 - Find PI to Nth digit" << '\n';
+		std::cout << "3 - Find e to the Nth digit" << '\n';
+		std::cout << "4 - Prime Factorization" << '\n';
+
+		std::cin >> input;
+		if (input == 1) {
 			calc();
 		}
-		else if (input == 2){
+		else if (input == 2) {
 			pi();
 		}
-		else if (input == 3){
+		else if (input == 3) {
 			evalue();
+		}
+		else if (input == 4) {
+			prime();
 		}
 
 		loop = returnMenu();
@@ -38,62 +43,94 @@ int main() {
 }
 
 void calc() {
-	int x, y;
+	double x, y;
 	char oper;
 
-	cout << "Enter your input in the form of x+y." << endl;
+	std::cout << "Enter your input in the form of x+y." << '\n';
 
-	cin >> x >> oper >> y;
+	std::cin >> x >> oper >> y;
 	if (oper == '+') {
-		cout << x + y << endl;
+		std::cout << x + y << '\n';
 	}
 	else if (oper == '-') {
-		cout << x - y << endl;
+		std::cout << x - y << '\n';
 	}
 	else if (oper == '*') {
-		cout << x * y << endl;
+		std::cout << x * y << '\n';
 	}
 	else if (oper == '/') {
-		cout << x / y << endl;
+		std::cout << x / y << '\n';
 	}
 	else
-		cout << "Error";
+		std::cout << "Error";
 }
 
-void pi(){
-	cout << "Enter number of decimals to calculate pi to:" << endl;
+void pi() {
+	std::cout << "Enter number of decimals to calculate pi to:" << '\n';
 	int num;
-	cin >> num;
+	std::cin >> num;
 	double pi = acos(-1);
-	cout << fixed;
-	cout << setprecision(num) << pi << endl;
+	std::cout << std::fixed;
+	std::cout << std::setprecision(num) << pi << '\n';
 
 }
 
-void evalue(){
-	cout << "Enter number of decimals to calculate e to:" << endl;
+void evalue() {
+	std::cout << "Enter number of decimals to calculate e to:" << '\n';
 	int num;
-	cin >> num;
+	std::cin >> num;
 	double e = exp(1);
-	cout << fixed;
-	cout << setprecision(num) << e << endl;
+	std::cout << std::fixed;
+	std::cout << std::setprecision(num) << e << '\n';
 }
+
+void prime() {
+	std::cout << "Enter a number:" << '\n';
+	int n;
+	std::cin >> n;
+	while (n % 2 == 0)
+	{
+		std::cout << 2 << " ";
+		n = n/2;
+	}
+
+// n must be odd at this point. So we can skip
+// one element (Note i = i +2)
+	for (int i = 3; i <= sqrt(n); i = i + 2)
+	{
+		// While i divides n, print i and divide n
+		while (n % i == 0)
+		{
+			std::cout << i << " ";
+			n = n/i;
+		}
+	}
+
+// This condition is to handle the case when n
+// is a prime number greater than 2
+	if (n > 2)
+		std::cout << n << " ";
+
+	std::cout << '\n';
+	return;
+}
+
 bool returnMenu() {
 	bool loop = true;
-	while (loop == true){
-		cout << "Return to Menu? (y/n)" << endl;
+	while (loop == true) {
+		std::cout << "Return to Menu? (y/n)" << '\n';
 		char menu;
-		cin >> menu;
-		if (tolower(menu) == 'y'){
+		std::cin >> menu;
+		if (tolower(menu) == 'y') {
 			loop = true;
 			return loop;
 		}
-		else if (tolower(menu) == 'n'){
+		else if (tolower(menu) == 'n') {
 			loop = false;
 			return loop;
 		}
 		else {
-			cout << "Error. Please try again" << endl;
+			std::cout << "Error. Please try again" << '\n';
 			loop = true;
 		}
 	}
